@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import pickle
+import requests
 
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 
@@ -26,4 +27,21 @@ option = st.selectbox(
 
 if st.button("Recommend"):
     recommended = recommend(option)
-    st.write(recommended)
+    id_list = []
+    for i in recommended:
+        id_temp = list(df.loc[df['title'] == i, 'movie_id'])
+        id = id_temp[0]
+        id_list.append(id)
+    
+    col1, col2, col3, col4, col5 = st.columns(5)
+
+    with col1:
+        st.write(id_list[0], recommended[0])
+    with col2:
+        st.write(id_list[1], recommended[1])
+    with col3:
+        st.write(id_list[2], recommended[2])
+    with col4:
+        st.write(id_list[3], recommended[3])
+    with col5:
+        st.write(id_list[4], recommended[4])
