@@ -23,3 +23,7 @@ def recommend(movie):
 option = st.selectbox(
     'What Movies would you like to watch?',
     movie_list)
+
+if st.button("Recommend"):
+    recommended = recommend(option)
+    st.write(recommended)
